@@ -1,5 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const userRoute = require('./user/router')
 const roleRoute = require('./role/router')
@@ -12,6 +13,7 @@ const port = 3333
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(cors())
 
 app.use('/user', userRoute)
 app.use('/role', roleRoute)
