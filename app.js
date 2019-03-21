@@ -9,6 +9,7 @@ const arrowRoute = require('./arrow/router')
 const ruleRoute = require('./rule_competition/router')
 const categoryRoute = require('./category/router')
 const scoreRoute = require('./score/router')
+const phaseRoute = require('./phase/router')
 
 const app = express();
 const port = 3333
@@ -24,6 +25,7 @@ app.use('/arrow', arrowRoute)
 app.use('/rule', ruleRoute)
 app.use('/category', categoryRoute)
 app.use('/score', scoreRoute)
+app.use('/phase', phaseRoute)
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
