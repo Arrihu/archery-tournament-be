@@ -9,6 +9,7 @@
   "author": "ahadsenja",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "sequelize": "^4.43.0",
     "sequelize-cli": "^5.4.0",
