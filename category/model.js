@@ -1,4 +1,6 @@
 const Category = require('../orm/models/category')
+const Target = require('../orm/models/target')
+const Tournament = require('../orm/models/tournament')
 
 
 class CategoryModel {
@@ -22,30 +24,48 @@ class CategoryModel {
     static create(req, res, object, option={}) {
         let body = req.body
 
-        Category.create({
-            nama: body.nama,
-            divisi: body.divisi,
-            jarak_tembak: body.jarak_tembak,
-            jenis_target: body.jenis_target
-        }).then(category => {
-            object.data = category
-            res.send(object)
+        Target.findById(body.targetId).then(target => {
+            Tournament.findById(body.tournamentId).then(tournamet => {
+                if (target && tournamet !== null) {
+                    Category.create({
+                        name: body.name,
+                        division: body.division,
+                        range: body.range,
+                        targetId: body.targetId,
+                        tournamentId: body.tournamentId
+                    }).then(category => {
+                        object.data = category
+                        res.send(object)
+                    })
+                }
+            }).catch(error => {
+                console.log(error)
+            })
         })
     }
 
     static update(req, res, object, option={}) {
         let body = req.body
 
-        Category.findById(body.id).then(category => {
-            category.update({
-                nama: body.nama,
-                divisi: body.divisi,
-                jarak_tembak: body.jarak_tembak,
-                jenis_target: body.jenis_target
-            }).then(category => {
-                object.data = category
-                res.send(object)
+        Target.findById(body.targetId).then(target => {
+            Tournament.findById(body.tournamentId).then(tournament => {
+                if (target && tournament !== null) {
+                    Category.findById(body.id).then(category => {
+                        category.update({
+                            name: body.name,
+                            division: body.division,
+                            range: body.range,
+                            targetId: body.targetId,
+                            tournamentId: body.tournamentId
+                        }).then(category => {
+                            object.data = category
+                            res.send(object)
+                        })
+                    })
+                }
             })
+        }).catch(error => {
+            console.log(error)
         })
     }
 
