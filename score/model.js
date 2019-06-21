@@ -1,4 +1,7 @@
 const Score = require('../orm/models/score')
+const Archer = require('../orm/models/archer')
+const Category = require('../orm/models/category')
+const EventOrganizer = require('../orm/models/event_organizer')
 
 
 class ScoreModel {
@@ -22,25 +25,47 @@ class ScoreModel {
     static create(req, res, object, option={}) {
         let body = req.body
 
-        Score.create({
-            tanggal: body.tanggal,
-            babak: body.babak
-        }).then(score => {
-            object.data = score
-            res.send(object)
+        Archer.findById(body.archerId).then(archer => {
+            Category.findById(body.categoryId).then(category => {
+                EventOrganizer.findById(body.eventOrganizerId).then(event_organizer => {
+                    if (archer && category && event_organizer !== null) {
+                        Score.create({
+                            date: body.date,
+                            end: body.end,
+                            archerId: body.archerId,
+                            categoryId: body.categoryId,
+                            eventOrganizerId: body.eventOrganizerId
+                        }).then(score => {
+                            object.data = score
+                            res.send(object)
+                        })
+                    }
+                })
+            })
         })
     }
 
     static update(req, res, object, option={}) {
         let body = req.body
 
-        Score.findById(body.id).then(score => {
-            score.update({
-                tanggal: body.tanggal,
-                babak: body.babak
-            }).then(score => {
-                object.data = score
-                res.send(object)
+        Archer.findById(body.archerId).then(archer => {
+            Category.findById(body.categoryId).then(category => {
+                EventOrganizer.findById(body.eventOrganizerId).then(event_organizer => {
+                    if (archer && category && event_organizer !== null) {
+                        Score.findById(body.id).then(score => {
+                            score.update({
+                                date: body.date,
+                                end: body.end,
+                                archerId: body.archerId,
+                                categoryId: body.categoryId,
+                                eventOrganizerId: body.eventOrganizerId
+                            }).then(score => {
+                                object.data = score,
+                                res.send(object)
+                            })
+                        })
+                    }
+                })
             })
         })
     }
