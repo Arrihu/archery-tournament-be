@@ -23,7 +23,7 @@ class TargetModel {
         let body = req.body
 
         Target.create({
-            type: body.type,
+            name: body.name,
             size: body.size
         }).then(target => {
             object.data = target
@@ -36,7 +36,7 @@ class TargetModel {
         
         Target.findById(body.id).then(target => {
             target.update({
-                type: body.type,
+                name: body.name,
                 size: body.size
             }).then(target => {
                 object.data = target
