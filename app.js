@@ -15,6 +15,7 @@ const archerRoute = require('./archer/router')
 const clubRoute = require('./club/router')
 const eventOrganizerRoute = require('./event_organizer/router')
 const tournamentRoute = require('./tournament/router')
+const setupTournamentRoute = require('./setup_tournament/router')
 
 const app = express();
 const port = 3333
@@ -36,6 +37,11 @@ app.use('/archer', archerRoute)
 app.use('/club', clubRoute)
 app.use('/event-organizer', eventOrganizerRoute)
 app.use('/tournament', tournamentRoute)
+app.use('/setup-tournament', setupTournamentRoute)
+
+app.get('/', function(request, response) {
+    response.sendFile(__dirname + '/test/login.html')
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}!`)
