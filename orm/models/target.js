@@ -4,7 +4,7 @@ const Category = require('./category')
 
 
 const Target = sqlConn.define('target', {
-    type: Sequelize.STRING,
+    name: Sequelize.STRING,
     size: Sequelize.INTEGER
 })
 
