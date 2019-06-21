@@ -15,6 +15,6 @@ const Tournament = sqlConn.define('tournament', {
 Tournament.hasMany(Category)
 Tournament.hasMany(EventOrganizer)
 Tournament.hasMany(Archer)
-Tournament.sync({force: true});
+// Tournament.sync({force: true});
 
 module.exports = Tournament;
