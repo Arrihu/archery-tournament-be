@@ -4,7 +4,7 @@ const sqlConn = require('../connection')
 
 const Arrow = sqlConn.define('arrow', {
     type: Sequelize.STRING,
-    long: Sequelize.FLOAT,
+    length: Sequelize.FLOAT,
     diameter: Sequelize.FLOAT,
     spine: Sequelize.INTEGER
 })
