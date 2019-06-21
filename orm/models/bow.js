@@ -3,7 +3,9 @@ const sqlConn = require('../connection')
 
 
 const Bow = sqlConn.define('bow', {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    length: Sequelize.INTEGER,
+    weight: Sequelize.INTEGER
 })
 
 // Bow.sync({force: true})
