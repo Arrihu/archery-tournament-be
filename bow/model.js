@@ -23,7 +23,9 @@ class BowModel {
         let body = req.body
 
         Bow.create({
-            type: body.type
+            type: body.type,
+            length: body.length,
+            weight: body.weight
         }).then(bow => {
             object.data = bow
             res.send(object)
@@ -35,7 +37,9 @@ class BowModel {
 
         Bow.findById(body.id).then(bow => {
             bow.update({
-                type: body.type
+                type: body.type,
+                length: body.length,
+                weight: body.weight
             }).then(bow => {
                 object.data = bow
                 res.send(object)
