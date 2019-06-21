@@ -24,7 +24,7 @@ class ArrowModel {
 
         Arrow.create({
             type: body.type,
-            long: body.long,
+            length: body.length,
             diameter: body.diameter,
             spine: body.spine
         }).then(arrow => {
@@ -39,7 +39,7 @@ class ArrowModel {
         Arrow.findById(body.id).then(arrow => {
             arrow.update({
                 type: body.type,
-                long: body.long,
+                length: body.length,
                 diameter: body.diameter,
                 spine: body.spine
             }).then(arrow => {
